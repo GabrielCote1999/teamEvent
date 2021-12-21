@@ -10,4 +10,3 @@ class EventCatalog:
     def setEvent(self, event):
         self.event.append(event)
 
-        
