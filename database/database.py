@@ -40,6 +40,7 @@ def main():
     path = os.path.dirname(os.path.abspath(__file__))
     database = os.path.join(path, 'teamEvent.db')
 
+    #We will need to add the fk 
     sql_create_categoryTypes_table = """ CREATE TABLE IF NOT EXISTS categoryTypes(
                                             categoryTypeId int NOT NULL,
                                             categoryType text NOT NULL
