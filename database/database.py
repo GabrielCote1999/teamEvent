@@ -1,8 +1,13 @@
 import sqlite3
 from sqlite3 import Error
+import os
+
+path = os.path.dirname(os.path.abspath(__file__))
+database = os.path.join(path, 'teamEvent.db')
 
 
-def create_connection(db_file):
+
+def create_connection(database):
     """ create a database connection to the SQLite database
         specified by db_file
     :param db_file: database file
@@ -10,7 +15,7 @@ def create_connection(db_file):
     """
     conn = None
     try:
-        conn = sqlite3.connect(db_file)
+        conn = sqlite3.connect(database)
         return conn
     except Error as e:
         print(e)
@@ -32,7 +37,8 @@ def create_table(conn, create_table_sql):
 
 
 def main():
-    database = r"C:\sqlite\db\pythonsqlite.db"
+    path = os.path.dirname(os.path.abspath(__file__))
+    database = os.path.join(path, 'teamEvent.db')
 
     sql_create_categoryTypes_table = """ CREATE TABLE IF NOT EXISTS categoryTypes(
                                             categoryTypeId int NOT NULL,
@@ -43,7 +49,7 @@ def main():
                                             categoryId integer PRIMARY KEY,
                                             categoryName text NOT NULL,
                                             categoryType text
-                                            FOREIGN KEY (categoryTypeId) REFERENCES categoryType (categoryTypeId)
+                                            
                                         );"""
 
     sql_create_adress_table = """CREATE TABLE IF NOT EXISTS adress(
@@ -53,7 +59,8 @@ def main():
                                             roadName text NOT NULL,
                                             zipCode text NOT NULL,
                                             country text NOT NULL,
-                                            province text NOT NULL);"""
+                                            province text NOT NULL
+                                            );"""
 
     sql_create_events_table = """CREATE TABLE IF NOT EXISTS events(
                                             eventId integer PRIMARY KEY,
@@ -63,8 +70,6 @@ def main():
                                             creationDate date NOT NULL,
                                             eventStatus text NOT NULL,
                                             vote integer
-                                            FOREIGN KEY (adressId) REFERENCES adress (adressId)
-                                            FOREIGN KEY (categoryId) REFERENCES category (categoryId)
                                             );"""
     
     sql_create_user_table = """CREATE TABLE IF NOT EXISTS user(
@@ -74,8 +79,7 @@ def main():
                                             userPassword text NOT NULL,
                                             email text NOT NULL,
                                             creationDate date NOT NULL,
-                                            dateOfBirth date NOT NULL,
-                                            FOREIGN KEY (adressId) REFERENCES adress (adressId)
+                                            dateOfBirth date NOT NULL
                                             );"""
 
     # create a database connection
