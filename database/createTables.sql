@@ -1,14 +1,15 @@
---User table
---we will add the fk adress after the creation of the adress table
 
-CREATE TABLE IF NOT EXISTS user(
-    userId integer PRIMARY KEY,
-    firstName text NOT NULL,
-    lastName text NOT NULL,
-    userPassword text NOT NULL,
-    email text NOT NULL,
-    creationDate date NOT NULL,
-    dateOfBirth date NOT NULL
+--categoryType table
+CREATE TABLE IF NOT EXISTS categoryTypes(
+    categoryTypeId int NOT NULL,
+    categoryType text NOT NULL
+);
+--Category table
+CREATE TABLE IF NOT EXISTS category(
+    categoryId integer PRIMARY KEY,
+    categoryName text NOT NULL,
+    categoryType text
+    FOREIGN KEY (categoryTypeId) REFERENCES categoryType (categoryTypeId)
 );
 
 CREATE TABLE IF NOT EXISTS adress(
@@ -20,7 +21,7 @@ CREATE TABLE IF NOT EXISTS adress(
     country text NOT NULL,
     province text NOT NULL
 );
---We will add the adress FK and category FK after their creation
+--Events table
 CREATE TABLE IF NOT EXISTS events(
     eventId integer PRIMARY KEY,
     eventName text NOT NULL,
@@ -29,16 +30,19 @@ CREATE TABLE IF NOT EXISTS events(
     creationDate date NOT NULL,
     eventStatus text NOT NULL,
     vote integer
+    FOREIGN KEY (adressId) REFERENCES adress (adressId)
+    FOREIGN KEY (categoryId) REFERENCES category (categoryId)
+);
+--User table
+CREATE TABLE IF NOT EXISTS user(
+    userId integer PRIMARY KEY,
+    firstName text NOT NULL,
+    lastName text NOT NULL,
+    userPassword text NOT NULL,
+    email text NOT NULL,
+    creationDate date NOT NULL,
+    dateOfBirth date NOT NULL,
+    FOREIGN KEY (adressId) REFERENCES adress (adressId)
 );
 
---We will add the categoryType FK after the table creation
-CREATE TABLE IF NOT EXISTS category(
-    categoryId integer PRIMARY KEY,
-    categoryName text NOT NULL,
-    categoryType text
-);
 
-CREATE TABLE IF NOT EXISTS categoryTypes(
-    categoryTypeId int NOT NULL,
-    categoryType text NOT NULL
-);
