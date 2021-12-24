@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS categoryTypes(
 CREATE TABLE IF NOT EXISTS category(
     categoryId integer PRIMARY KEY,
     categoryName text NOT NULL,
-    categoryType text
+    categoryTypeId text,
     FOREIGN KEY (categoryTypeId) REFERENCES categoryType (categoryTypeId)
 );
 
@@ -24,18 +24,21 @@ CREATE TABLE IF NOT EXISTS adress(
 --Events table
 CREATE TABLE IF NOT EXISTS events(
     eventId integer PRIMARY KEY,
+    adressId int,
+    categoryId int,
     eventName text NOT NULL,
     startDate date NOT NULL,
     endDate date NOT NULL,
     creationDate date NOT NULL,
     eventStatus text NOT NULL,
-    vote integer
-    FOREIGN KEY (adressId) REFERENCES adress (adressId)
+    vote integer,
+    FOREIGN KEY (adressId) REFERENCES adress (adressId),
     FOREIGN KEY (categoryId) REFERENCES category (categoryId)
 );
 --User table
 CREATE TABLE IF NOT EXISTS user(
     userId integer PRIMARY KEY,
+    adressId int,
     firstName text NOT NULL,
     lastName text NOT NULL,
     userPassword text NOT NULL,

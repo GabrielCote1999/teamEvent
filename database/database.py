@@ -49,7 +49,9 @@ def main():
     sql_create_category_table = """CREATE TABLE IF NOT EXISTS category(
                                             categoryId integer PRIMARY KEY,
                                             categoryName text NOT NULL,
-                                            categoryType text
+                                            categoryType text,
+                                            categoryTypeId text,
+                                            FOREIGN KEY (categoryTypeId) REFERENCES categoryType (categoryTypeId)
                                             
                                         );"""
 
@@ -65,24 +67,30 @@ def main():
 
     sql_create_events_table = """CREATE TABLE IF NOT EXISTS events(
                                             eventId integer PRIMARY KEY,
+                                            adressId int,
+                                            categoryId int,
                                             eventName text NOT NULL,
                                             startDate date NOT NULL,
                                             endDate date NOT NULL,
                                             creationDate date NOT NULL,
                                             eventStatus text NOT NULL,
-                                            vote integer
+                                            vote integer,
+                                            FOREIGN KEY (adressId) REFERENCES adress (adressId),
+                                            FOREIGN KEY (categoryId) REFERENCES category (categoryId)
                                             );"""
     
     sql_create_user_table = """CREATE TABLE IF NOT EXISTS user(
                                             userId integer PRIMARY KEY,
+                                            adressId int,
                                             firstName text NOT NULL,
                                             lastName text NOT NULL,
                                             userPassword text NOT NULL,
                                             email text NOT NULL,
                                             creationDate date NOT NULL,
-                                            dateOfBirth date NOT NULL
+                                            dateOfBirth date NOT NULL,
+                                            FOREIGN KEY (adressId) REFERENCES adress (adressId)
                                             );"""
-
+   
     # create a database connection
     conn = create_connection(database)
 
