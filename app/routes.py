@@ -5,6 +5,7 @@ from flask import render_template
 
 
 @app.route("/")
+
 # define the view using a function, which returns a string
 def hello_world(name =None):
     return render_template('index.html', name = name)
