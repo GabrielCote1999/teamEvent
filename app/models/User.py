@@ -1,14 +1,9 @@
 from datetime import date
 class User:
-    def __init__(self, firstName: str, lastName: str, password: str, adress: str, email: str, role: str):
-        self.firstName = firstName
-        self.lastName = lastName
-        self.password = password
-        self.adress = adress
-        self.email = email
-        self.creationDate = date.today()
-        self.role = role
-        self.event = []
+    def __init__(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        firstName = db.String(64), index=True) 
+        
 
     def getFirstName(self):
         return self.firstName

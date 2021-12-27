@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./static/css">
     <!--<link rel="stylesheet" href="{{ url_for('static', filename='css') }}">-->
 </head>
-
+{% block content %}
 <body>
     <nav class="navbar navbar-light navbar-expand-lg fixed-top clean-navbar" style="background: #022b3a;">
         <div class="container"><a class="navbar-brand logo" href="#" style="font-family: Allerta, sans-serif;border-color: rgb(255,255,255);color: rgb(191,219,247);">Events</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -33,7 +33,7 @@
                     <h2 class="text-info">Log In</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
                 </div>
-                <form>
+                <form action = "" method = "post" novalidate>
                     <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email"></div>
                     <div class="mb-3"><label class="form-label" for="password">Password</label><input class="form-control" type="password" id="password"></div>
                     <div class="mb-3">

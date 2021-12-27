@@ -1,10 +1,17 @@
 from flask import Flask 
 from app import app
+from flask import render_template
 
-app = Flask(__name__)
 
-#Decorator modifies the function that follows it
-#It creates an association between the url (arg) and the function
-@app.route('/')
-def index():
-    return "Hello, World!"
+
+@app.route("/")
+# define the view using a function, which returns a string
+def hello_world(name =None):
+    return render_template('index.html', name = name)
+
+@app.route('/reg')
+def register():
+    return render_template('registration.html')
+    
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True, port=5000)
