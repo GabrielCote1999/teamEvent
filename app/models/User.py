@@ -1,9 +1,19 @@
 from datetime import date
-class User:
-    def __init__(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        firstName = db.String(64), index=True) 
-        
+from enum import unique
+from app import db
+
+class User(db.Model):
+    
+    id = db.Column(db.Integer, primary_key=True)
+    adress = db.Column(db.String, foreign_key = True)
+    firstName = db.Column(db.String(64), index = True)
+    lastName = db.Column(db.String(64), index = True)
+    email = db.Column(db.String(64), index = True, unique= True)
+    password_hash = db.Column(db.String(128))
+
+    def __repr__(self):
+        return '<User{}'.format(self.email)
+       
 
     def getFirstName(self):
         return self.firstName
