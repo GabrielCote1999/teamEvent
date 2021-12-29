@@ -31,14 +31,77 @@
                     <h2 style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Registration</h2>
                     <p style="color: rgb(31,122,140);font-family: Allerta, sans-serif;border-top-color: rgb(31, 122, 140);">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
                 </div>
-                <form style="border-top-color: #1f7a8c;">
-                    <div class="mb-3"><label class="form-label" for="name" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">First Name</label><input class="form-control item" type="text" id="name"></div>
-                    <div class="mb-3"><label class="form-label" for="name" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Last Name</label><input class="form-control item" type="text" id="name-1"></div>
-                    <div class="mb-3"><label class="form-label" for="name" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Adress</label><input class="form-control item" type="text" id="name-4"></div>
-                    <div class="mb-3"><label class="form-label" for="name" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Date Of Birth</label><input class="form-control" type="date" style="color: rgb(31,122,140);"></div>
-                    <div class="mb-3"><label class="form-label" for="email" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Email</label><input class="form-control item" type="email" id="email"></div>
-                    <div class="mb-3"><label class="form-label" for="name" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Password</label><input class="form-control item" type="text" id="name-2"></div><button class="btn btn-primary" type="submit" style="background: rgb(31,122,140);">Sign Up</button>
+                <!--This is the registration form-->
+                {% block content %}
+                <form action = "" method = "post" style="border-top-color: #1f7a8c;" novalidate>
+                    {{ form.hidden_tag() }}
+                    <!--firstName-->
+                    <div class="mb-3">
+                        
+                            <label class="form-label" for="firstName" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">First Name</label>
+                            <input 
+                            class="form-control" 
+                            type="firstName" 
+                            name = "firstName"
+                            id="firstName">
+                            
+
+                        
+                    </div>
+                    <!--lastName-->
+                    <div class="mb-3">
+                        <label class="form-label" for="lastName" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Last Name</label>
+                        <div class = 'form-group'> 
+                            <input 
+                            class="form-control" 
+                            type="lastName" 
+                            name = "lastName"
+                            id="lastName">
+                        </div>
+                    </div>
+                    <!--adress-->
+                    <div class="mb-3"><label class="form-label" for="adress" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Adress</label>
+                        <div class = 'form-group'> 
+                            <input 
+                            class="form-control" 
+                            type="adress"
+                            name="adress" 
+                            id="adress">
+                        </div>
+                    </div>
+                    <!--dateOfBirth-->
+                    <div class="mb-3"><label class="form-label" for="dateOfBirth" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Date Of Birth</label>
+                        <div class = 'form-group'> 
+                            <input 
+                            class="form-control" 
+                            type="date"
+                            name="dateOfBirth" 
+                            style="color: rgb(31,122,140);"
+                            id= 'dateOfBirth'>
+                        </div>  
+                    </div>
+                    <!--email-->
+                    <div class="mb-3"><label class="form-label" for="email" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Email</label>
+                        <div class = 'form-group'>     
+                            <input 
+                            class="form-control " 
+                            type="email"
+                            name="email" 
+                            id="email"></div>
+                        </div>
+                    <!--password-->
+                    <div class="mb-3"><label class="form-label" for="password" style="color: rgb(31,122,140);font-family: Allerta, sans-serif;">Password</label>
+                        <div class = 'form-group'> 
+                            <input 
+                            class="form-control " 
+                            type="password"
+                            name="password" 
+                            id="password">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit" style="background: rgb(31,122,140);">Sign Up</button>
                 </form>
+                {% endblock %}
             </div>
         </section>
     </main>
