@@ -11,7 +11,7 @@ class User(db.Model):
     lastName = db.Column(db.String(64), index = True)
     email = db.Column(db.String(64), index = True, unique= True)
     password_hash = db.Column(db.String(128))
-    creationDate = db.Column(db.DateTime, index = True, default = datetime.utcnow)
+    #creationDate = db.Column(db.DateTime, index = True, default = datetime.utcnow)
 
     def __repr__(self):
         return '<User{}'.format(self.email)
