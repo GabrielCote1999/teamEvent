@@ -5,6 +5,7 @@ from flask_migrate import Config, Migrate
 from flask import render_template
 import os
 from os import path
+from flask_login import LoginManager
 
 
 db = SQLAlchemy()
@@ -15,14 +16,15 @@ DB_NAME = 'database.db'
 def create_app():
 
     app = Flask(__name__, template_folder='template')
+    #login = LoginManager(app)
     app.config['SECRET_KEY'] = 'thisIsMySecretKey'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     db.init_app(app)
   
     #database object
     
-   # app.config.from_object(Config)
-    #migrate = Migrate(app, db)
+    app.config.from_object(Config)
+    migrate = Migrate(app, db)
     from .views import views
 
 
@@ -31,6 +33,8 @@ def create_app():
     from .model import User, Event
     
     createDatabase(app)
+
+    
 
     return app
 

@@ -1,6 +1,8 @@
 from datetime import datetime, timezone
 import datetime
 from enum import unique
+from werkzeug.security import generate_password_hash, check_password_hash
+#from website.__init__ import login
 
 from flask_login import UserMixin
 
@@ -12,10 +14,20 @@ class User(db.Model, UserMixin):
     firstName = db.Column(db.String(64), index = True)
     lastName = db.Column(db.String(64), index = True)
     email = db.Column(db.String(64), index = True, unique= True)
-    #password_hash = db.Column(db.String(128))
-    #creationDate = db.Column(db.DateTime(timezone=True), default = datetime.datetime.utcnow())
+    password_hash = db.Column(db.String(128))
+    creationDate = db.Column(db.DateTime(timezone=True), default = datetime.datetime.utcnow())
     #list of events that a user is in
     #events = db.relationship('Event')
+
+def setPassword(self, password):
+    self.password_hash = generate_password_hash(password)
+
+def checkPassword(self,password):
+    return check_password_hash(self.pasword_hash, password)
+"""
+@login.user_loader
+def loadUser(id):
+    return User.query.get(int(id))"""
 
 """def init_db():
     db.create_all()
