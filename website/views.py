@@ -1,24 +1,25 @@
 
-from flask import Flask
-from werkzeug.utils import redirect 
-from app import app
+#from flask import Flask
+from flask import Blueprint
+#from werkzeug.utils import redirect 
+#from main import app
 from flask import render_template, flash, redirect
 
-from app.models.forms import LoginForm, RegistrationForm
+from website.models.forms import LoginForm, RegistrationForm
+
+views = Blueprint('views', __name__)
 
 
-
-
-@app.route("/")
+@views.route("/")
 # define the view using a function, which returns a string
 def hello_world(name =None):
     return render_template('index.html', name = name)
 
 
-@app.route('/reg', methods = ['GET', 'POST'])
+@views.route('/reg', methods = ['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    print(form.dateOfBirth)
+
     if form.validate_on_submit():
         flash('User {} is registred'.format(
             form.firstName, form.lastName
@@ -27,7 +28,7 @@ def register():
         return redirect('/')
     return render_template('registration.html', title = 'Register', form = form)
 
-@app.route('/login', methods=['GET', 'POST'])
+@views.route('/login', methods=['GET', 'POST'])
 def login():
     #passing the login form model
     form = LoginForm()
@@ -40,5 +41,3 @@ def login():
 
     return render_template('login.html', title = 'Sign In', form = form)
     
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True, port=5000)
