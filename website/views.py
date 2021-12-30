@@ -1,11 +1,13 @@
 
 #from flask import Flask
-from flask import Blueprint
+
 #from werkzeug.utils import redirect 
 #from main import app
-from flask import render_template, flash, redirect
-
+from flask import render_template, flash, redirect, Blueprint, request
 from website.models.forms import LoginForm, RegistrationForm
+from .model import User, Event
+from . import db
+
 
 views = Blueprint('views', __name__)
 
@@ -20,10 +22,20 @@ def hello_world(name =None):
 def register():
     form = RegistrationForm()
 
+    firstName = request.form.get('firstName')
+    lastName = request.form.get('lastName')
+    adress = request.form.get('adress')
+    dateOfBirth = request.form.get('dateOfBirth')
+    email = request.form.get('email')
+    password = request.form.get('password')
+
     if form.validate_on_submit():
         flash('User {} is registred'.format(
             form.firstName, form.lastName
         ))
+        newUser = User(firstName = firstName,lastName = lastName,email = email)
+        db.session.add(newUser)
+        db.session.commit()
         print(form.firstName, form.lastName)
         return redirect('/')
     return render_template('registration.html', title = 'Register', form = form)

@@ -4,7 +4,7 @@ from enum import unique
 
 from flask_login import UserMixin
 
-from website.__init__ import db
+from . import db
 
 class User(db.Model, UserMixin):
     
